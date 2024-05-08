@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios'
 import { Normal } from './normal.jsx'
-import { Gotyounigga } from './assets/Gotyounigga.jsx'
+import GeolocationInfo from './assets/Gotyounigga.jsx'
+
 function App () {
   const [clicked, setClicked] = useState(false)
   // ! ||--------------------------------------------------------------------------------||
@@ -36,16 +37,22 @@ function App () {
     getGeolocation()
   }, [])
 
+  const headers = {
+    'Fastah-Key': '638eec4613e64929aa0a4d7505b6d8cb'
+  }
+
   const getGeolocation = async () => {
     try {
       const response = await axios.get(
-        `https://api.ip2location.io/?key=B9566EF164ED964C863A366AE579AC05&ip=${IPaddress}`
+        `https://ep.api.getfastah.com/whereis/v1/json/auto`,
+        { headers }
       )
-      const data = await response.data
+
+      const data = response.data // No need for await here
       setGeoInfo(data)
       console.log(data)
     } catch (error) {
-      console.log("COULDN'T GET GEO LOCATION FROM IP ")
+      console.log("COULDN'T GET GEO LOCATION FROM IP ", error) // Log the error for debugging
     }
   }
 
@@ -60,7 +67,9 @@ function App () {
             </button>
           </div>
         ) : (
-          <Gotyounigga data={geoInfo} />
+          <div>
+            <GeolocationInfo data={geoInfo} />
+          </div>
         )}
       </div>
     </>
