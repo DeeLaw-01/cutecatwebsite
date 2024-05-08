@@ -38,7 +38,9 @@ function App () {
 
   const getGeolocation = async () => {
     try {
-      const response = await axios.get(`http://ip-api.com/json/${IPaddress}`)
+      const response = await axios.get(
+        `https://api.ipgeolocation.io/ipgeo?apiKey=dc9d888a233b468fba90a33a82f9d014&ip=${IPaddress}`
+      )
       const data = await response.data
       setGeoInfo(data)
       console.log(data)
