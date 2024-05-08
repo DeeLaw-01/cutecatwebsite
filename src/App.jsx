@@ -39,7 +39,7 @@ function App () {
   const getGeolocation = async () => {
     try {
       const response = await axios.get(
-        `https://api.ipgeolocation.io/ipgeo?apiKey=dc9d888a233b468fba90a33a82f9d014&ip=${IPaddress}`
+        `https://api.ip2location.io/?key=B9566EF164ED964C863A366AE579AC05&ip=${IPaddress}`
       )
       const data = await response.data
       setGeoInfo(data)
